@@ -6,16 +6,15 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import torchvision.transforms as transforms
-import torchvision.models as models
+#from torchvision.models import vgg19
 
 from PIL import Image
 
 
-content_layers_default = ('conv_10',)
-style_layers_default = ('conv_1', 'conv_2', 'conv_5', 'conv_9', 'conv_13')
+content_layers_default = ('conv_4',)
+style_layers_default = ('conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5')
 imsize = 256
 device = torch.device("cpu")
-vgg = models.vgg19(pretrained=True).features.to(device).eval()
 cnn_normalization_mean = torch.tensor([0.4076, 0.4579, 0.48502]).to(device)
 cnn_normalization_std = torch.tensor([0.229, 0.224, 0.225]).to(device)
 
@@ -160,9 +159,11 @@ def get_style_model_and_losses(cnn, normalization_mean, normalization_std,
 def run_style_transfer(content_img, style_img, input_img,
                        normalization_mean=cnn_normalization_mean,
                        normalization_std=cnn_normalization_std,
-                       cnn=vgg, num_steps=300,
+                        num_steps=300,
                        style_weight=50000, content_weight=1):
     """Run the style transfer."""
+    #cnn = vgg19(pretrained=True).features.to(device).eval()
+    cnn = torch.load('model/my_new_model.pth')
     model, style_losses, content_losses = get_style_model_and_losses(cnn,
                                                                      normalization_mean, normalization_std,
                                                                      style_img, content_img)

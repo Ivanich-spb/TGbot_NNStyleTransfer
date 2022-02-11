@@ -13,7 +13,6 @@ if not bot_token:
 bot = Bot(token=bot_token)
 # Диспетчер для бота
 dp = Dispatcher(bot, storage=MemoryStorage())
-# Включаем логирование, чтобы не пропустить важные сообщения
 logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
                     level=logging.INFO
                     )

@@ -7,7 +7,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from model.nn import start, clear_ram
-from multiprocessing import get_context
+#from multiprocessing import get_context
 from app.keyboards import keyboard_start, keyboard_cancel, keyboard_style
 
 
@@ -124,7 +124,7 @@ async def get_style_img(message: types.Message, state: FSMContext):
 
 
 
-async def multiproc(content_image_path: str, style_image_path: str):
+'''async def multiproc(content_image_path: str, style_image_path: str):
     global cpu_free, num_waiting_users
     while True:
         if cpu_free:
@@ -137,20 +137,17 @@ async def multiproc(content_image_path: str, style_image_path: str):
             break
         else:
             await sleep(1)
-    return output
+    return output'''
 
 
 def register_handlers(dp: Dispatcher):
     dp.register_message_handler(cmd_start, commands="start", state="*")
     dp.register_message_handler(cmd_cancel, commands="cancel", state="*")
     dp.register_message_handler(cmd_cancel, Text(equals="отмена", ignore_case=True), state="*")
-    #dp.register_callback_query_handler(first_step, text="Начать", state='*')
     dp.register_message_handler(first_step, Text(equals="Начать", ignore_case=True), state='*')
     dp.register_message_handler(example, Text(equals="Пример", ignore_case=True), state='*')
     dp.register_message_handler(info, Text(equals="Инфо", ignore_case=True), state='*')
-    #dp.register_message_handler(star_night, Text(equals="Звездная ночь", ignore_case=True), state='*')
     dp.register_message_handler(get_content_img, state=GetImages.waiting_content_image)
     dp.register_message_handler(get_content_img, state=GetImages.waiting_content_image, content_types=['photo'])
     dp.register_message_handler(get_style_img, state=GetImages.waiting_style_image)
     dp.register_message_handler(get_style_img, state=GetImages.waiting_style_image, content_types=['photo'])
-    #dp.register_message_handler(style_transfer, state=GetImages.style_transfer_images)
