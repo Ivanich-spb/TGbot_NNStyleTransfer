@@ -12,12 +12,12 @@
 Бот реализован на асинхронном фреймворке aiogram, в рамках итогового проекта в [Deep Learning School](https://www.dlschool.org) (осенний семестр 2021 базовый поток)
 
 ### Example
-Original
-![image](https://github.com/Ivanich-spb/TGbot_NNStyleTransfer/tree/master/images/example/content.jpg)
-Style
-![image](https://github.com/Ivanich-spb/TGbot_NNStyleTransfer/tree/master/images/example/style.jpg)
-Result
-![image](https://github.com/Ivanich-spb/TGbot_NNStyleTransfer/tree/master/images/example/result.png)
+_Original_![](/home/ivanich/PycharmProjects/TGbot_NNStyleTransfer/images/example/content.jpg)
+
+_Style![](/home/ivanich/PycharmProjects/TGbot_NNStyleTransfer/images/example/style.jpg)_
+
+_Result![](/home/ivanich/PycharmProjects/TGbot_NNStyleTransfer/images/example/result.png)_
+
 ### Requirements
 
 - Python 3.8
@@ -33,4 +33,5 @@ _minimal hardware:_
 ###Features
 - aiogram FSM
 - default styles
+- only conv layers from pretrained VGG19 (4Mb instead 550Mb)
 - asynchronous work (not realized yet)
