@@ -5,6 +5,8 @@ from os import getenv
 from sys import exit
 from app.handlers import register_handlers
 
+
+# перед запуском - установить переменную окружения $BOT_TOKEN
 bot_token = getenv("BOT_TOKEN")
 if not bot_token:
     exit("Error: no token provided")

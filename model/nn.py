@@ -14,7 +14,7 @@ content_layers_default = ('conv_4',)
 style_layers_default = ('conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5')
 imsize = 128
 device = torch.device("cpu")
-cnn_normalization_mean = torch.tensor([0.4076, 0.4579, 0.48502]).to(device)
+cnn_normalization_mean = torch.tensor([0.485, 0.456, 0.406]).to(device)
 cnn_normalization_std = torch.tensor([0.229, 0.224, 0.225]).to(device)
 
 
@@ -158,8 +158,8 @@ def get_style_model_and_losses(cnn, normalization_mean, normalization_std,
 def run_style_transfer(content_img, style_img, input_img,
                        normalization_mean=cnn_normalization_mean,
                        normalization_std=cnn_normalization_std,
-                        num_steps=100,
-                       style_weight=50000, content_weight=1):
+                        num_steps=150,
+                       style_weight=100000, content_weight=1):
     """Run the style transfer."""
     #cnn = vgg19(pretrained=True).features.to(device).eval()
     cnn = torch.load('model/my_new_model.pth')
@@ -198,7 +198,7 @@ def run_style_transfer(content_img, style_img, input_img,
             loss = style_score + content_score
 
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(input_img, 52.0, 2)
+            torch.nn.utils.clip_grad_norm_(input_img, 99.0, 2)
 
             nonlocal best_loss, best_output
             if loss.item() < best_loss:
@@ -206,6 +206,11 @@ def run_style_transfer(content_img, style_img, input_img,
                 best_output = copy.deepcopy(input_img)
 
             run[0] += 1
+            if run[0] % 30 == 0:
+                print("run {}:".format(run))
+                print('Style Loss : {:4f} Content Loss: {:4f}'.format(
+                    style_score.item(), content_score.item()))
+                print()
 
             return style_score + content_score
 
@@ -236,5 +241,5 @@ def start(content_img_path: str, style_img_path: str) -> str:
 
 
 if __name__ == '__main__':
-    print(start("/home/ivanich/PycharmProjects/TGbot_NNStyleTransfer/images/465143934/content", "/home/ivanich/PycharmProjects/TGbot_NNStyleTransfer/images/465143934/style"))
+    print(start("images/example/content.jpg", "images/example/style.jpg"))
     clear_ram()
