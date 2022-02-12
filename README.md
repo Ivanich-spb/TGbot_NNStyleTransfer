@@ -12,17 +12,20 @@
 Бот реализован на асинхронном фреймворке aiogram, в рамках итогового проекта в [Deep Learning School](https://www.dlschool.org) (осенний семестр 2021 базовый поток)
 
 ### Example
-_Original_![](images/example/content.jpg)
+- **_Original_**
+![](images/example/content.jpg)
 
-_Style![](images/example/style.jpg)_
+- **_Style_** </br>
+![](images/example/style.jpg)_
 
-_Result![](images/example/result.png)_
+- **_Result_** </br>
+![](images/example/result.png)_
 
 ### Requirements
 
 - Python 3.8
-- PyTorch 
-- TorchVision
+- PyTorch (+cpu for minimal hardware requirements)
+- TorchVision (+cpu for minimal hardware requirements)
 - Pillow
 - aiogram
 
@@ -30,7 +33,7 @@ _minimal hardware:_
 - 1Gb Ram
 - 1 core cpu
 
-###Features
+### Features
 - aiogram FSM
 - default styles
 - only conv layers from pretrained VGG19 (4Mb instead 550Mb)
