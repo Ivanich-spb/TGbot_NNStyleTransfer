@@ -103,9 +103,10 @@ async def get_style_img(message: types.Message, state: FSMContext):
                          f"Подождите {TRANSFER_TIME * num_waiting_users} мин.",
                          reply_markup=types.ReplyKeyboardRemove())
     user_data = await state.get_data()
-    num_waiting_users += 1
+    #num_waiting_users += 1
+    output = start(user_data['content_img'], user_data['style_img'])
 
-    while True:
+    '''while True:
         if cpu_free:
             cpu_free = False
             with futures.ThreadPoolExecutor() as p: # ProcessPoolExecutor(max_workers=1, mp_context=get_context('spawn')) as p:
@@ -115,7 +116,7 @@ async def get_style_img(message: types.Message, state: FSMContext):
             num_waiting_users -= 1
             break
         else:
-            await sleep(1)
+            await sleep(1)'''
     with open(output, 'rb') as photo:
         await message.answer_photo(photo, reply_markup=keyboard_start)
     rmtree(output[:-10])

@@ -78,7 +78,7 @@ def gram_matrix(input_data):
 def get_input_optimizer(input_img):
     # this line to show that input is a parameter that requires a gradient
     # добоваляет содержимое тензора катринки в список изменяемых оптимизатором параметров
-    optimizer = optim.LBFGS([input_img.requires_grad_()],)
+    optimizer = optim.LBFGS([input_img.requires_grad_()], max_iter=20, lr=1)
     return optimizer
 
 
@@ -159,11 +159,12 @@ def get_style_model_and_losses(cnn, normalization_mean, normalization_std,
 def run_style_transfer(content_img, style_img, input_img,
                        normalization_mean=cnn_normalization_mean,
                        normalization_std=cnn_normalization_std,
-                        num_steps=300,
+                        num_steps=100,
                        style_weight=50000, content_weight=1):
     """Run the style transfer."""
     #cnn = vgg19(pretrained=True).features.to(device).eval()
     cnn = torch.load('model/my_new_model.pth')
+    cnn.to(device).eval()
     model, style_losses, content_losses = get_style_model_and_losses(cnn,
                                                                      normalization_mean, normalization_std,
                                                                      style_img, content_img)
