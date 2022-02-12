@@ -12,11 +12,11 @@
 Бот реализован на асинхронном фреймворке aiogram, в рамках итогового проекта в [Deep Learning School](https://www.dlschool.org) (осенний семестр 2021 базовый поток)
 
 ### Example
-_Original_![](/home/ivanich/PycharmProjects/TGbot_NNStyleTransfer/images/example/content.jpg)
+_Original_![](images/example/content.jpg)
 
-_Style![](/home/ivanich/PycharmProjects/TGbot_NNStyleTransfer/images/example/style.jpg)_
+_Style![](images/example/style.jpg)_
 
-_Result![](/home/ivanich/PycharmProjects/TGbot_NNStyleTransfer/images/example/result.png)_
+_Result![](images/example/result.png)_
 
 ### Requirements
 
