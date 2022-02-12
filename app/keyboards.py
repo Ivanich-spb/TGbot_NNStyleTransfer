@@ -1,7 +1,7 @@
 from aiogram import types
 
 
-DEFAULT_STYLES = ("Звездная ночь", "Мона Лиза", "Мультяшка", "Карандаш", "Аватар", "Скетч")
+DEFAULT_STYLES = ("Звездная ночь", "Пикассо", "Мультяшка", "Карандаш", "Аватар", "Скетч")
 
 
 keyboard_start = types.ReplyKeyboardMarkup(resize_keyboard=True)

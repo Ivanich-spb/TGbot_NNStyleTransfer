@@ -7,7 +7,6 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from model.nn import start, clear_ram
-#from multiprocessing import get_context
 from app.keyboards import keyboard_start, keyboard_cancel, keyboard_style
 
 
@@ -16,7 +15,7 @@ cpu_free = True
 num_waiting_users = 1
 PATHS = {
     'Звездная ночь': 'van_star.jpg',
-    'Мона Лиза': 'lisa.jpg',
+    'Пикассо': 'picasso.jpg',
     "Мультяшка": 'mult.jpg',
     "Карандаш": "pencil.jpg",
     "Аватар": "avatar.jpg",
@@ -72,7 +71,6 @@ async def first_step(message: types.Message):
     await GetImages.waiting_content_image.set()
 
 
-#@dp.message_handler(state=GetImages.waiting_content_image)
 async def get_content_img(message: types.Message, state: FSMContext):
     if message.content_type != 'photo':
         await message.answer("Пожалуйста, загрузите изображение.")
@@ -86,7 +84,6 @@ async def get_content_img(message: types.Message, state: FSMContext):
                          reply_markup=keyboard_style)
 
 
-#@dp.message_handler(state=GetImages.waiting_style_image)
 async def get_style_img(message: types.Message, state: FSMContext):
     global cpu_free, num_waiting_users, TRANSFER_TIME
     if message.content_type != 'photo' and message.text not in PATHS:
@@ -122,23 +119,6 @@ async def get_style_img(message: types.Message, state: FSMContext):
     rmtree(output[:-10])
     clear_ram()
     await state.finish()
-
-
-
-'''async def multiproc(content_image_path: str, style_image_path: str):
-    global cpu_free, num_waiting_users
-    while True:
-        if cpu_free:
-            cpu_free = False
-            with futures.ProcessPoolExecutor(max_workers=1, mp_context=get_context('spawn')) as p:
-                res = p.submit(start, content_image_path, style_image_path)
-                output = res.result()
-            cpu_free = True
-            num_waiting_users -= 1
-            break
-        else:
-            await sleep(1)
-    return output'''
 
 
 def register_handlers(dp: Dispatcher):
